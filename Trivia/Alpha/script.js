@@ -6,7 +6,7 @@
     let question = document.querySelector("#question");
     let answerOptions = document.querySelectorAll("#answers > .option");
     let errorMsg = document.querySelector("#error");
-    let issueURL = "https://github.com/Craftidore/";
+    let issueURL = "https://github.com/Craftidore/craftidore.github.io/issues";
     let categoryOptions = document.querySelector("#category-selection");
     let difficultyOptions = document.querySelector("#difficulty-selection");
     let questionNumberOptions = document.querySelector("#number-of-questions-selection");
@@ -133,6 +133,8 @@
         populateDifficulties();
         populateQuestionNumber();
         playAgain.addEventListener("click", () => {
+            score = 0;
+            scoreSpan.innerText = "";
             trivia.getTrivia(getOpts(), updateWithQ, showError);
         });
         categoryOptions.addEventListener("change", () => {

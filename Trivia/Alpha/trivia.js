@@ -63,6 +63,7 @@
             .then((response) => response.json())
             .then((data) => {
                 questions = data;
+                currentQ = 0;
                 callback(data);
             })
             .catch((error) => {
