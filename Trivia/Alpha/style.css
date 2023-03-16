@@ -1,0 +1,108 @@
+* {
+    box-sizing: border-box;
+}
+:root {
+    --main-text-color: black;
+    --main-background-color: #8c8c8a;
+    --trivia-background-color: #5c5c5a;
+    --question-background-color: #3c3c3a;
+    --base-font-size: 25px;
+    --max-ui-width: 900px;
+}
+
+body {
+    color: var(--main-text-color);
+    background-color: var(--main-background-color);
+    font-size: var(--base-font-size);
+}
+
+.visual-container {
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+#error {
+    display: none;
+    font-size: 1.5em;
+    background-color: #ff0000;
+    font-weight: 800;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: var(--max-ui-width);
+}
+
+h1 {
+    text-align: center;
+    font-size: 2em;
+}
+
+/* Because I don't like the default styles */
+button {
+    display: block;
+    border: none;
+    /* Apparently Chrome colors buttons by default */
+    color: var(--main-text-color);
+    /* And sets font size */
+    font-size: var(--base-font-size);
+}
+
+.center-button {
+    margin: auto;
+}
+
+#category-info {
+    text-align: center;
+    font-size: 1.5em;
+}
+
+#trivia {
+    max-width: var(--max-ui-width);
+    margin: auto;
+    background-color: var(--trivia-background-color);
+}
+
+#question {
+    margin: 5px;
+    background-color: var(--question-background-color);
+}
+
+#answers {
+    /* Boy do I love how easy it is to do grid layouts! 
+       It's *so* much easier than the bootstrap way of doing it. */
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+#answers > .option {
+    background-color: var(--question-background-color);
+    margin: 3px;
+}
+#answers > .option:hover {
+    background-color: white;
+}
+#answers > .option.correct {
+    background-color: green;
+}
+#answers > .option.incorrect {
+    background-color: red;
+}
+#answers > .option.selected {
+    border: solid blue 4px;
+}
+
+#next-question {
+    background-color: var(--question-background-color);
+}
+
+#settings {
+    background-color: var(--trivia-background-color);
+    max-width: var(--max-ui-width);
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#settings select, #settings option, #apply-settings {
+    background-color: var(--main-background-color);
+}
+
