@@ -69,9 +69,9 @@
         get: () => currentQ+1
     });
 
-    Object.defineProperty(M, "nextQuestion", { 
-        get: () => currentQ++
-    });
+    M.nextQuestion = () => {
+        currentQ++;
+    }
 
     Object.defineProperty(M, "question", { 
         get: () => questions[currentQ]

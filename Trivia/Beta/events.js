@@ -8,6 +8,9 @@
             this._name = name;
             this._onUpdate = onUpdateList;
         }
+        addListener(onUpdate) {
+            this._onUpdate.push(onUpdate);
+        }
         broadcast() {
             for (let func of this._onUpdate) {
                 func();
@@ -18,7 +21,13 @@
     let events = {};
 
     M.registerEvent = (name, onUpdate = console.log) => {
-        events[name] = new event(name, [onUpdate]);
+        console.log(events);
+        if (events[name] === null || events[name] === undefined) {
+            events[name] = new event(name, [onUpdate]);
+        }
+        else {
+            events[name].addListener(onUpdate);
+        }
     }
 
     M.broadcastEvent = (name) => {
@@ -39,8 +48,17 @@
     let M = {};
     let state = {};
 
-    M.registerState = (name, initialValue) => {
-        state[name] = initialValue;
+    M.registerState = (name, onChange, initialValue) => {
+        state[name] = initialValue; // if parameter undefined, undefined
+        Object.defineProperty(M, name, {
+            get: () => state[name],
+            set: (newVal) => {
+                state[name] = newVal;
+                if (onChange !== null) {
+                    events.broadcastEvent(onChange);
+                }
+            }
+        });
     }
 
     M.is = (name, value) => {

@@ -3,9 +3,12 @@
 
     <head>
         <title>Trivia!</title>
-        <script src="trivia.js"></script>
-        <script src="events.js"></script>
-        <script src="script.js" defer></script>
+        <script src="trivia.js"></script> <!-- Dependancy -->
+        <script src="events.js"></script> <!-- Dependancy -->
+        <script src="globals.js"></script> <!-- Globals used by all programs -->
+        <script src="triviaUI.js" defer></script> <!-- triviaUI function definitions; event-listening added in init.js -->
+        <script src="triviaGame.js" defer></script> <!-- triviaGame function definitions; event-listening added in init.js -->
+        <script src="init.js" defer></script> <!-- Sets all triviaUI and triviaGame to listen to their respective events, then broadcasts init -->
         <link rel="stylesheet" href="style.css">
     </head>
 

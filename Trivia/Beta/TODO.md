@@ -2,10 +2,10 @@
 
 - [ ] Analyze HTML
 - `script.js` rewrite
-    - [ ] const where better
-    - [ ] Create rudimentary event/state handling
-    - [ ] Separate initialization (adding onclicks) from app functionality/behavior
-    - [ ] Stop creating elements via strings & use some form of constructor
+    - [x] const where better
+    - [x] Create rudimentary event/state handling
+    - [x] Separate initialization (adding onclicks) from app functionality/behavior
+    - [x] Stop creating elements via strings & use some form of constructor
         - [W3C docs on the subject](https://www.w3schools.com/js/js_htmldom_nodes.asp)
 - `style.css` adjustments
     - [x] Color fixes (contrast issues)
