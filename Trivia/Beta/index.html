@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Trivia!</title>
+        <script src="trivia.js"></script>
+        <script src="script.js" defer></script>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <p id="error" class="visual-container">Error!<!-- display:none; by default --></p>
+        <h1 class="visual-container">Trivia!</h1>
+        <div style="text-align: center;max-width: var(--max-ui-width); 
+        margin-left: auto; margin-right: auto;">This is a alpha release; it's 
+            kinda clunky, and was designed to give me practice with <code>fetch
+            </code>. There's definitely also minor logic problems and ways to 
+            break the UI. They will be fixed in the next update.</div>
+        <div id="category-info">Category is... <span id="category">Loading</span></div>
+        <div id="trivia" class="visual-container">
+            <div id="question" class="visual-container">Question is Loading!</div>
+            <div id="answers" class="visual-container">
+                <button answer-num="1" class="option visual-container">Answer 1</button>
+                <button answer-num="2" class="option visual-container">Answer 2</button>
+                <button answer-num="3" class="option visual-container">Answer 3</button>
+                <button answer-num="4" class="option visual-container">Answer 4</button>
+            </div>
+            <button id="next-question" class="center-button">Next Question</button>
+        </div>
+        <div id="stats">
+            <div class="score-box visual-container">Score: <span id="score"></span></div>
+        </div>
+        <div id="settings" class="visual-container">
+            <div>Settings</div>
+            <select id="category-selection" name="Category">
+            </select>
+            <select id="difficulty-selection" name="Difficulty">
+            </select>
+            <select id="number-of-questions-selection" name="Number Of Questions">
+            </select>
+            <button id="apply-settings" class="center-button">Play Again/Apply Settings</button>
+        </div>
+    </body>
+</html>
+
