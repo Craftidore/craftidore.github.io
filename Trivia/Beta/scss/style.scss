@@ -1,0 +1,151 @@
+/* Global stuff */
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --main-background-color: #129490;
+    --main-ui-color: #A1E887;
+    --main-button-color: #4B4E6C;
+    --game-text-color: #FFFFFF;
+    --settings-text: #000000;
+    --base-font-size: 25px;
+    --max-ui-width: 900px;
+}
+
+body {
+    background-color: var(--main-background-color);
+    font-size: var(--base-font-size);
+}
+
+/* Mixins */
+
+@mixin centered-block {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@mixin visual-container {
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+/* HTML assisters */
+
+.center-button {
+    @include centered-block;
+}
+
+/* Because I don't like the default styles */
+button {
+    display: block;
+    border: none;
+    /* Apparently Chrome colors buttons by default */
+    color: var(--main-text-color);
+    /* And sets font size */
+    font-size: var(--base-font-size);
+}
+
+/* Page Header */
+
+#error {
+    @include visual-container;
+    display: none;
+    font-size: 1.5em;
+    background-color: #ff0000;
+    font-weight: 800;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: var(--max-ui-width);
+}
+
+h1 {
+    text-align: center;
+    font-size: 2em;
+}
+
+/* Category */
+
+#category-info {
+    text-align: center;
+    font-size: 1.5em;
+}
+
+/* Trivia Section */
+
+#trivia {
+    @include visual-container;
+    max-width: var(--max-ui-width);
+    margin: auto;
+    background-color: var(--main-ui-color);
+}
+
+#question {
+    @include visual-container;
+    margin: 5px;
+    background-color: var(--main-button-color);
+    color: var(--game-text-color);
+}
+
+/* Answer */
+#answers {
+    @include visual-container;
+    /* Boy do I love how easy it is to do grid layouts! 
+       It's *so* much easier than the bootstrap way of doing it. */
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+#answers > .option {
+    @include visual-container;
+    background-color: var(--main-button-color);
+    color: var(--game-text-color);
+    margin: 3px;
+}
+#answers > .option:hover:not(.correct, .incorrect, .selected) {
+    background-color: var(--main-ui-color);
+    color: var(--main-button-color);
+}
+#answers > .option.correct {
+    background-color: green;
+}
+#answers > .option.incorrect {
+    background-color: red;
+}
+#answers > .option.selected {
+    border: solid blue 4px;
+}
+
+#next-question {
+    background-color: var(--main-button-color);
+    color: var(--game-text-color);
+}
+
+/* Score */
+
+#stats {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: fit-content;
+    @include centered-block;
+    @include visual-container;
+    background-color: var(--main-ui-color);
+    color: var(--settings-text);
+}
+
+/* Settings */
+
+#settings {
+    @include visual-container;
+    background-color: var(--main-ui-color);
+    color: var(--settings-text);
+    max-width: var(--max-ui-width);
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#settings select, #settings option, #apply-settings {
+    background-color: var(--main-ui-color);
+}
+

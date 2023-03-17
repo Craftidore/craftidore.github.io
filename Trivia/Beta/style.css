@@ -1,108 +1,154 @@
+/* Global stuff */
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
+
 :root {
-    --main-text-color: black;
-    --main-background-color: #8c8c8a;
-    --trivia-background-color: #5c5c5a;
-    --question-background-color: #3c3c3a;
-    --base-font-size: 25px;
-    --max-ui-width: 900px;
+  --main-background-color: #129490;
+  --main-ui-color: #A1E887;
+  --main-button-color: #4B4E6C;
+  --game-text-color: #FFFFFF;
+  --settings-text: #000000;
+  --base-font-size: 25px;
+  --max-ui-width: 900px;
 }
 
 body {
-    color: var(--main-text-color);
-    background-color: var(--main-background-color);
-    font-size: var(--base-font-size);
+  background-color: var(--main-background-color);
+  font-size: var(--base-font-size);
 }
 
-.visual-container {
-    padding: 10px;
-    border-radius: 5px;
-    text-align: center;
-}
-
-#error {
-    display: none;
-    font-size: 1.5em;
-    background-color: #ff0000;
-    font-weight: 800;
-    margin-right: auto;
-    margin-left: auto;
-    max-width: var(--max-ui-width);
-}
-
-h1 {
-    text-align: center;
-    font-size: 2em;
+/* Mixins */
+/* HTML assisters */
+.center-button {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Because I don't like the default styles */
 button {
-    display: block;
-    border: none;
-    /* Apparently Chrome colors buttons by default */
-    color: var(--main-text-color);
-    /* And sets font size */
-    font-size: var(--base-font-size);
+  display: block;
+  border: none;
+  /* Apparently Chrome colors buttons by default */
+  color: var(--main-text-color);
+  /* And sets font size */
+  font-size: var(--base-font-size);
 }
 
-.center-button {
-    margin: auto;
+/* Page Header */
+#error {
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  display: none;
+  font-size: 1.5em;
+  background-color: #ff0000;
+  font-weight: 800;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: var(--max-ui-width);
 }
 
+h1 {
+  text-align: center;
+  font-size: 2em;
+}
+
+/* Category */
 #category-info {
-    text-align: center;
-    font-size: 1.5em;
+  text-align: center;
+  font-size: 1.5em;
 }
 
+/* Trivia Section */
 #trivia {
-    max-width: var(--max-ui-width);
-    margin: auto;
-    background-color: var(--trivia-background-color);
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  max-width: var(--max-ui-width);
+  margin: auto;
+  background-color: var(--main-ui-color);
 }
 
 #question {
-    margin: 5px;
-    background-color: var(--question-background-color);
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  margin: 5px;
+  background-color: var(--main-button-color);
+  color: var(--game-text-color);
 }
 
+/* Answer */
 #answers {
-    /* Boy do I love how easy it is to do grid layouts! 
-       It's *so* much easier than the bootstrap way of doing it. */
-    display: grid;
-    grid-template-columns: auto auto;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  /* Boy do I love how easy it is to do grid layouts! 
+     It's *so* much easier than the bootstrap way of doing it. */
+  display: grid;
+  grid-template-columns: auto auto;
 }
 
 #answers > .option {
-    background-color: var(--question-background-color);
-    margin: 3px;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  background-color: var(--main-button-color);
+  color: var(--game-text-color);
+  margin: 3px;
 }
-#answers > .option:hover {
-    background-color: white;
+
+#answers > .option:hover:not(.correct, .incorrect, .selected) {
+  background-color: var(--main-ui-color);
+  color: var(--main-button-color);
 }
+
 #answers > .option.correct {
-    background-color: green;
+  background-color: green;
 }
+
 #answers > .option.incorrect {
-    background-color: red;
+  background-color: red;
 }
+
 #answers > .option.selected {
-    border: solid blue 4px;
+  border: solid blue 4px;
 }
 
 #next-question {
-    background-color: var(--question-background-color);
+  background-color: var(--main-button-color);
+  color: var(--game-text-color);
 }
 
+/* Score */
+#stats {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  background-color: var(--main-ui-color);
+  color: var(--settings-text);
+}
+
+/* Settings */
 #settings {
-    background-color: var(--trivia-background-color);
-    max-width: var(--max-ui-width);
-    margin-right: auto;
-    margin-left: auto;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  background-color: var(--main-ui-color);
+  color: var(--settings-text);
+  max-width: var(--max-ui-width);
+  margin-right: auto;
+  margin-left: auto;
 }
 
 #settings select, #settings option, #apply-settings {
-    background-color: var(--main-background-color);
+  background-color: var(--main-ui-color);
 }
 
+/*# sourceMappingURL=style.css.map */
