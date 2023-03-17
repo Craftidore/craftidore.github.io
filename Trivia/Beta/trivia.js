@@ -35,27 +35,16 @@
     M.difficulties = ["null", "hard", "medium", "easy"];
 
     M.triviaURLQuery = (opts) => {
-        console.dir(opts);
+        let searchParams = new URLSearchParams();
         let validate = (value) => value !== null && value !== undefined;
-        let queryOpts = [];
-        let category = opts["category"];
-        if (validate(category)) {
-            queryOpts.push("categories=" + category);
+
+        for (let key of Object.keys(opts)) {
+            if (validate(opts[key])) {
+                searchParams.append(key, opts[key]);
+            }
         }
-        difficulty = opts["difficulty"];
-        if (validate(difficulty)) {
-            queryOpts.push("difficulty=" + difficulty);
-        }
-        let limit = opts["limit"];
-        if (validate(limit)) {
-            queryOpts.push("limit=" + limit);
-        }
-        let region = opts["region"];
-        if (validate(region)) {
-            queryOpts.push("region=" + region);
-        }
-        queryString = "?" + queryOpts.join("&");
-        return triviaURL + queryString;
+
+        return triviaURL + "?" + searchParams.toString();
     }
 
     M.getTrivia = (opts, callback, errorCallback=console.error) => {
