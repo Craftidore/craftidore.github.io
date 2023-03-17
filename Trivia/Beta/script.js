@@ -2,21 +2,21 @@
 
 // IIFE to limit scope
 ((global) => {
-    let category = document.querySelector("#category");
-    let question = document.querySelector("#question");
-    let answerOptions = document.querySelectorAll("#answers > .option");
-    let errorMsg = document.querySelector("#error");
-    let issueURL = "https://github.com/Craftidore/craftidore.github.io/issues";
-    let categoryOptions = document.querySelector("#category-selection");
-    let difficultyOptions = document.querySelector("#difficulty-selection");
-    let questionNumberOptions = document.querySelector("#number-of-questions-selection");
-    let playAgain = document.querySelector("#apply-settings");
+    const category = document.querySelector("#category");
+    const question = document.querySelector("#question");
+    const answerOptions = document.querySelectorAll("#answers > .option");
+    const errorMsg = document.querySelector("#error");
+    const issueURL = "https://github.com/Craftidore/craftidore.github.io/issues";
+    const categoryOptions = document.querySelector("#category-selection");
+    const difficultyOptions = document.querySelector("#difficulty-selection");
+    const questionNumberOptions = document.querySelector("#number-of-questions-selection");
+    const playAgain = document.querySelector("#apply-settings");
     let currentCategory = "no-category";
     let currentDifficulty = "no-difficulty";
     let currentNumQs = 10;
-    let scoreSpan = document.querySelector("#score");
+    const scoreSpan = document.querySelector("#score");
     let score = 0;
-    let nextQuestion = document.querySelector("#next-question");
+    const nextQuestion = document.querySelector("#next-question");
 
     let resetAnswers = () => {
         answerOptions.forEach((option) => {
