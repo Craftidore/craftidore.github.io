@@ -13,17 +13,21 @@
     events.registerEvent(e.error, triviaUI.showError);
     events.registerEvent(e.questionsLoaded, triviaGame.registerQuestion);
     events.registerEvent(e.questionsLoaded, triviaUI.updateScore);
+    events.registerEvent(e.questionUnanswered, triviaUI.showNoAnswerYet);
     events.registerEvent(e.nextQuestion, triviaGame.getNewQuestion);
     events.onPost(e.nextQuestion, e.askQuestion);
     events.registerEvent(e.askQuestion, triviaUI.updateWithQ);
     events.registerEvent(e.askQuestion, triviaGame.askQuestion);
     events.registerEvent(e.questionAnswered, triviaGame.answerQuestion);
     events.registerEvent(e.questionAnswered, triviaUI.revealAnswer);
+    events.registerEvent(e.questionAnswered, () => { events.broadcastEvent(e.hideMessage); });
+    events.onPost(e.questionAnswered, e.checkGameOver);
     state.setOnChange("questionsAsked", e.updateScore); // updates score every time the number of questions asked has been changed
     events.registerEvent(e.updateScore, triviaUI.updateScore);
-    events.registerEvent(e.questionAnswered, triviaGame.checkEndGame);
+    events.registerEvent(e.checkGameOver, triviaGame.checkEndGame);
     events.registerEvent(e.gameOver, triviaUI.showEndGame);
-    events.registerEvent(e.hideMessage, triviaUI.hideEndGame);
+    events.registerEvent(e.gameOver, triviaGame.endGame);
+    events.registerEvent(e.hideMessage, triviaUI.hideMessage);
     events.registerEvent(e.optsChange, triviaUI.optsChange);
     events.registerEvent(e.newGame, triviaGame.newTrivia);
     events.registerEvent(e.newGame, triviaGame.initScore);

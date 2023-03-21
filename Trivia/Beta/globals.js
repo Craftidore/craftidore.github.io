@@ -7,10 +7,12 @@
         error: "error",
         hideMessage: "hideMessage",
         questionsLoaded: "questionsLoaded",
+        questionUnanswered: "questionUnanswered",
         nextQuestion: "nextQuestion",
         askQuestion: "askQuestion",
-        updateScore: "updateScore",
         questionAnswered: "questionAnswered",
+        updateScore: "updateScore",
+        checkGameOver: "checkGameOver",
         gameOver: "gameOver",
         newGame: "newGame",
         optsChange: "optsChange",
@@ -27,5 +29,6 @@
     state.registerState("questionsAsked");
     state.registerState("score");
     state.registerState("guessable");
+    state.registerState("gameGoing");
 })(window);
 

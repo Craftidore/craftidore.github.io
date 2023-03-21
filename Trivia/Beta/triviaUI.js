@@ -86,9 +86,9 @@
     M.registerNextQuestion = () => {
         nextQuestionEl.addEventListener("click", (event) => {
             if (state["guessable"]) {
-                alert("You haven't answered the current question!");
+                events.broadcastEvent(e.questionUnanswered);
             }
-            else {
+            else if (state["gameGoing"]) {
                 console.log("next question");
                 events.broadcastEvent(e.nextQuestion);
             }
@@ -167,7 +167,13 @@
         messageEl.classList.add("show");
     }
 
-    M.hideEndGame = () => {
+    M.showNoAnswerYet = () => {
+        messageEl.innerText = "You haven't answered the current question!";
+        messageEl.classList.add("show");
+    }
+
+    M.hideMessage = () => {
+        console.log("hiding message!");
         messageEl.classList.remove("show");
     }
 

@@ -51,6 +51,7 @@
 
     M.askQuestion = () => {
         state["guessable"] = true;
+        state["gameGoing"] = true; // guessable can be false while gameGoing is true, but gameGoing can never be false when guessable is true.
     }
 
     M.answerQuestion = () => {
@@ -64,9 +65,15 @@
     }
 
     M.checkEndGame = () => {
+        console.log("checking for game end");
         if (trivia.isLastQuestion) {
             events.broadcastEvent(e.gameOver);
         }
+    }
+
+    M.endGame = () => {
+        state["guessable"] = false;
+        state["gameGoing"] = false;
     }
 
     global.triviaGame = M;

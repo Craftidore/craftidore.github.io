@@ -41,6 +41,7 @@
     }
 
     M.broadcastEvent = (name) => {
+        console.log("broadcasting " + name);
         if (events[name] !== null && events[name] !== undefined) {
             events[name].broadcast();
         }
