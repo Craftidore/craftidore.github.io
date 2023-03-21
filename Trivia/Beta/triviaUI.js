@@ -6,6 +6,7 @@
     const questionEl = document.querySelector("#question");
     const answerOptionsEls = document.querySelectorAll("#answers > .option");
     const errorMsgEl = document.querySelector("#error");
+    const messageEl = document.querySelector("#message");
     const categoryOptionsEl = document.querySelector("#category-selection");
     const difficultyOptionsEl = document.querySelector("#difficulty-selection");
     const questionNumberOptionsEl = document.querySelector("#number-of-questions-selection");
@@ -20,57 +21,7 @@
     const defaultNumQs = 10;
     state["currentNumQs"] = defaultNumQs;
 
-    M.showError = () => {
-        let error = state["error"]
-        errorMsgEl.innerHTML = `An error has occured! Please submit a <a href="${issueURL}">bug report</a>`;
-        errorMsgEl.style.display = "block";
-        console.error(error);
-    }
-
-    M.updateWithQ = () => {
-        M.resetAnswers();
-        let question = state["question"];
-        let category = state["category"];
-        let answers = state["answers"];
-        // trivia gets values from API so...
-        // WARN: DO NOT USE .innerHTML without sanitization!
-        categoryEl.innerText = category;
-        questionEl.innerText = question;
-        for (let i = 0; i < answers.length; i++) {
-            answerOptionsEls[i].innerText = answers[i];
-            answerOptionsEls[i].value = answers[i];
-        }
-    }
-
-    M.resetAnswers = () => {
-        answerOptionsEls.forEach((optionEl) => {
-            optionEl.classList.remove("correct");
-            optionEl.classList.remove("incorrect");
-            optionEl.classList.remove("selected");
-        });
-    }
-
-    M.revealAnswer = () => {
-        let correctAnswer = state["correctAnswer"];
-        let selectedAnswer = state["answer"];
-        console.log(correctAnswer);
-        console.log(selectedAnswer);
-        for (let answerEl of answerOptionsEls) {
-            if (answerEl.value === correctAnswer) {
-                answerEl.classList.add("correct");
-            }
-            else {
-                answerEl.classList.add("incorrect");
-            }
-            if (answerEl.value === selectedAnswer) {
-                answerEl.classList.add("selected");
-            }
-        }
-    }
-
-    M.updateScore = () => {
-        scoreEl.innerText = `${state["score"]} / ${state["questionsAsked"]}`;
-    }
+    /* Setting up the Document: */
 
     M.initOpts = () => {
         for (opt of [categoryOptionsEl, difficultyOptionsEl, questionNumberOptionsEl]) {
@@ -78,15 +29,6 @@
                 events.broadcastEvent(e.optsChange);
             })
         }
-    }
-
-    M.optsChange = () => {
-        state["currentCategory"] = 
-            categoryOptionsEl.options[categoryOptionsEl.selectedIndex].value;
-        state["currentDifficulty"] =
-            difficultyOptionsEl.options[difficultyOptionsEl.selectedIndex].value;
-        state["currentNumQs"] =
-            questionNumberOptionsEl.options[questionNumberOptionsEl.selectedIndex].value;
     }
 
     M.populateCategories = (categories) => {
@@ -133,8 +75,10 @@
     M.registerAnswerEls = () => {
         for (let answer of answerOptionsEls) {
             answer.addEventListener("click", (event) => {
-                state["answer"]  = event.target.value;
-                events.broadcastEvent(e.questionAnswered);
+                if (state["guessable"]) {
+                    state["answer"]  = event.target.value;
+                    events.broadcastEvent(e.questionAnswered);
+                }
             });
         }
     }
@@ -157,9 +101,74 @@
         });
     }
 
+    /* Reactionary Functions */
+
+    M.showError = () => {
+        let error = state["error"]
+        errorMsgEl.innerHTML = `An error has occured! Please submit a <a href="${issueURL}">bug report</a>`;
+        errorMsgEl.style.display = "block";
+        console.error(error);
+    }
+
+    M.updateWithQ = () => {
+        M.resetAnswers();
+        let question = state["question"];
+        let category = state["category"];
+        let answers = state["answers"];
+        // trivia gets values from API so...
+        // WARN: DO NOT USE .innerHTML without sanitization!
+        categoryEl.innerText = category;
+        questionEl.innerText = question;
+        for (let i = 0; i < answers.length; i++) {
+            answerOptionsEls[i].innerText = answers[i];
+            answerOptionsEls[i].value = answers[i];
+        }
+    }
+
+    M.revealAnswer = () => {
+        let correctAnswer = state["correctAnswer"];
+        let selectedAnswer = state["answer"];
+        for (let answerEl of answerOptionsEls) {
+            if (answerEl.value === correctAnswer) {
+                answerEl.classList.add("correct");
+            }
+            else {
+                answerEl.classList.add("incorrect");
+            }
+            if (answerEl.value === selectedAnswer) {
+                answerEl.classList.add("selected");
+            }
+        }
+    }
+
+    M.resetAnswers = () => {
+        answerOptionsEls.forEach((optionEl) => {
+            optionEl.classList.remove("correct");
+            optionEl.classList.remove("incorrect");
+            optionEl.classList.remove("selected");
+        });
+    }
+
+    M.updateScore = () => {
+        scoreEl.innerText = `${state["score"]} / ${state["questionsAsked"]}`;
+    }
+
+    M.optsChange = () => {
+        state["currentCategory"] = 
+            categoryOptionsEl.options[categoryOptionsEl.selectedIndex].value;
+        state["currentDifficulty"] =
+            difficultyOptionsEl.options[difficultyOptionsEl.selectedIndex].value;
+        state["currentNumQs"] =
+            questionNumberOptionsEl.options[questionNumberOptionsEl.selectedIndex].value;
+    }
 
     M.showEndGame = () => {
-        alert("No more questions! Click the play again button.");
+        messageEl.innerText = `No more questions! Click the Play Again button to play again!`;
+        messageEl.classList.add("show");
+    }
+
+    M.hideEndGame = () => {
+        messageEl.classList.remove("show");
     }
 
     global.triviaUI = M;

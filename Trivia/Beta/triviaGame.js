@@ -17,7 +17,7 @@
     }
 
     M.newTrivia = () => {
-        state["guessable"] = false; // trivia hasn't loaded
+        state["guessable"] = false; // trivia hasn't loaded, so don't let them answer
         trivia.getTrivia(getOpts(), 
             (data) => { 
                 console.log("trivia acquired");
@@ -38,13 +38,8 @@
 
     M.getNewQuestion = () => {
         trivia.nextQuestion();
-        if (trivia.hasQuestions) {
-            M.registerQuestion();
-            events.broadcastEvent(e.askQuestion);
-        }
-        else {
-            events.broadcastEvent(e.gameOver);
-        }
+        M.registerQuestion();
+        events.broadcastEvent(e.askQuestion);
     }
 
     M.registerQuestion = () => {
@@ -65,7 +60,12 @@
             }
             state["guessable"] = false;
             state["questionsAsked"] = state["questionsAsked"] + 1;
-            events.broadcastEvent(e.updateScore);
+        }
+    }
+
+    M.checkEndGame = () => {
+        if (trivia.isLastQuestion) {
+            events.broadcastEvent(e.gameOver);
         }
     }
 

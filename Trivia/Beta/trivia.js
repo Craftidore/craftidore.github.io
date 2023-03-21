@@ -1,6 +1,6 @@
 // IIFE module
 
-((global) => {
+;((global) => {
     let M = {};
 
     const triviaURL = "https://the-trivia-api.com/api/questions";
@@ -63,6 +63,10 @@
 
     Object.defineProperty(M, "hasQuestions",{ 
         get: () => { return currentQ < questions.length; }
+    });
+
+    Object.defineProperty(M, "isLastQuestion", {
+        get: () => { return currentQ+1 == questions.length; }
     });
 
     Object.defineProperty(M, "questionNumber", { 

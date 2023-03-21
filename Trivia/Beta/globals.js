@@ -1,9 +1,11 @@
 // INFO: Don't defer, just trigger after state.js
 
 ;((global) => {
+    // Yes, this would make more sense as an enum... No, I won't make it one.
     global.e = {
         init: "init",
         error: "error",
+        hideMessage: "hideMessage",
         questionsLoaded: "questionsLoaded",
         nextQuestion: "nextQuestion",
         askQuestion: "askQuestion",
@@ -13,19 +15,17 @@
         newGame: "newGame",
         optsChange: "optsChange",
     };
-    state.registerState("currentCategory", null);
-    state.registerState("currentDifficulty", null);
-    state.registerState("currentNumQs", null);
-    state.registerState("question", null);
-    state.registerState("category", null);
-    state.registerState("answers", null);
-    state.registerState("answer", null);
-    state.registerState("correctAnswer", null);
-    state.registerState("questionsAsked", null);
-    state.registerState("score", null);
-    state.registerState("guessable", null);
-    state.registerState("currentCategory", null);
-    state.registerState("currentDifficulty", null);
-    state.registerState("currentNumQs", null);
+
+    state.registerState("currentCategory");
+    state.registerState("currentDifficulty");
+    state.registerState("currentNumQs");
+    state.registerState("question");
+    state.registerState("category");
+    state.registerState("answers");
+    state.registerState("answer");
+    state.registerState("correctAnswer");
+    state.registerState("questionsAsked");
+    state.registerState("score");
+    state.registerState("guessable");
 })(window);
 

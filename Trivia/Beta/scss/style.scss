@@ -4,20 +4,17 @@
 }
 
 :root {
-    --main-background-color: #129490;
-    --main-ui-color: #A1E887;
-    --main-button-color: #4B4E6C;
+    --backdrop-background-color: #129490;
+    --main-text-color: #000000;
+    --main-ui-background-color: #A1E887;
+    --game-background-color: #4B4E6C;
     --game-text-color: #FFFFFF;
-    --settings-text: #000000;
+
+    --error-background-color: #ff0000;
+
     --base-font-size: 25px;
     --max-ui-width: 900px;
 }
-
-body {
-    background-color: var(--main-background-color);
-    font-size: var(--base-font-size);
-}
-
 /* Mixins */
 
 @mixin centered-block {
@@ -31,13 +28,42 @@ body {
     text-align: center;
 }
 
+@mixin ui-width {
+    max-width: var(--max-ui-width);
+}
+
+/* Color mixins */
+
+@mixin ui-background-colors {
+    background-color: var(--backdrop-background-color);
+    color: var(--main-text-color);
+}
+
+@mixin ui-foreground-colors {
+    background-color: var(--main-ui-background-color);
+    color: var(--main-text-color);
+}
+
+@mixin ui-game-colors {
+    background-color: var(--game-background-color);
+    color: var(--game-text-color);
+}
+
 /* HTML assisters */
 
 .center-button {
     @include centered-block;
 }
 
+/* body */
+
+body {
+    @include ui-background-colors;
+    font-size: var(--base-font-size);
+}
+
 /* Because I don't like the default styles */
+
 button {
     display: block;
     border: none;
@@ -51,18 +77,30 @@ button {
 
 #error {
     @include visual-container;
-    display: none;
+    @include centered-block;
+    @include ui-width;
+    background-color: var(--error-background-color);
     font-size: 1.5em;
-    background-color: #ff0000;
     font-weight: 800;
-    margin-right: auto;
-    margin-left: auto;
-    max-width: var(--max-ui-width);
+    display: none;
 }
 
 h1 {
     text-align: center;
     font-size: 2em;
+}
+
+/* Messages from the Game */
+
+#message {
+    @include visual-container;
+    @include centered-block;
+    @include ui-width;
+    @include ui-foreground-colors;
+    display: none;
+    &.show {
+        display: block;
+    }
 }
 
 /* Category */
@@ -76,50 +114,40 @@ h1 {
 
 #trivia {
     @include visual-container;
-    max-width: var(--max-ui-width);
-    margin: auto;
-    background-color: var(--main-ui-color);
+    @include centered-block;
+    @include ui-width;
+    @include ui-foreground-colors;
 }
 
 #question {
     @include visual-container;
+    @include ui-game-colors;
     margin: 5px;
-    background-color: var(--main-button-color);
-    color: var(--game-text-color);
 }
 
 /* Answer */
 #answers {
     @include visual-container;
+    @include ui-foreground-colors;
     /* Boy do I love how easy it is to do grid layouts! 
        It's *so* much easier than the bootstrap way of doing it. */
     display: grid;
     grid-template-columns: auto auto;
-}
-
-#answers > .option {
-    @include visual-container;
-    background-color: var(--main-button-color);
-    color: var(--game-text-color);
-    margin: 3px;
-}
-#answers > .option:hover:not(.correct, .incorrect, .selected) {
-    background-color: var(--main-ui-color);
-    color: var(--main-button-color);
-}
-#answers > .option.correct {
-    background-color: green;
-}
-#answers > .option.incorrect {
-    background-color: red;
-}
-#answers > .option.selected {
-    border: solid blue 4px;
+    > .option {
+        @include visual-container;
+        @include ui-game-colors;
+        margin: 3px;
+        &:hover:not(.correct, .incorrect, .selected) {
+            @include ui-foreground-colors;
+        }
+        &.correct { background-color: green; }
+        &.incorrect { background-color: red; }
+        &.selected { border: solid blue 4px; }
+    }
 }
 
 #next-question {
-    background-color: var(--main-button-color);
-    color: var(--game-text-color);
+    @include ui-game-colors;
 }
 
 /* Score */
@@ -128,24 +156,21 @@ h1 {
     margin-top: 10px;
     margin-bottom: 10px;
     width: fit-content;
-    @include centered-block;
     @include visual-container;
-    background-color: var(--main-ui-color);
-    color: var(--settings-text);
+    @include centered-block;
+    @include ui-foreground-colors;
 }
 
 /* Settings */
 
 #settings {
     @include visual-container;
-    background-color: var(--main-ui-color);
-    color: var(--settings-text);
-    max-width: var(--max-ui-width);
-    margin-right: auto;
-    margin-left: auto;
+    @include centered-block;
+    @include ui-foreground-colors;
+    @include ui-width;
 }
 
 #settings select, #settings option, #apply-settings {
-    background-color: var(--main-ui-color);
+    @include ui-foreground-colors;
 }
 

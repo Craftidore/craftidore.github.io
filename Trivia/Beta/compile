@@ -1,4 +1,4 @@
 #!/bin/sh
 
-sass --watch scss/style.scss ./style.css
-
+sass --watch scss/style.scss ./style.css &
+browser-sync start --server --directory --files "**/*"

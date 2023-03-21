@@ -4,25 +4,29 @@
 }
 
 :root {
-  --main-background-color: #129490;
-  --main-ui-color: #A1E887;
-  --main-button-color: #4B4E6C;
+  --backdrop-background-color: #129490;
+  --main-text-color: #000000;
+  --main-ui-background-color: #A1E887;
+  --game-background-color: #4B4E6C;
   --game-text-color: #FFFFFF;
-  --settings-text: #000000;
+  --error-background-color: #ff0000;
   --base-font-size: 25px;
   --max-ui-width: 900px;
 }
 
-body {
-  background-color: var(--main-background-color);
-  font-size: var(--base-font-size);
-}
-
 /* Mixins */
+/* Color mixins */
 /* HTML assisters */
 .center-button {
   margin-left: auto;
   margin-right: auto;
+}
+
+/* body */
+body {
+  background-color: var(--backdrop-background-color);
+  color: var(--main-text-color);
+  font-size: var(--base-font-size);
 }
 
 /* Because I don't like the default styles */
@@ -40,18 +44,34 @@ button {
   padding: 10px;
   border-radius: 5px;
   text-align: center;
-  display: none;
-  font-size: 1.5em;
-  background-color: #ff0000;
-  font-weight: 800;
-  margin-right: auto;
   margin-left: auto;
+  margin-right: auto;
   max-width: var(--max-ui-width);
+  background-color: var(--error-background-color);
+  font-size: 1.5em;
+  font-weight: 800;
+  display: none;
 }
 
 h1 {
   text-align: center;
   font-size: 2em;
+}
+
+/* Messages from the Game */
+#message {
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: var(--max-ui-width);
+  background-color: var(--main-ui-background-color);
+  color: var(--main-text-color);
+  display: none;
+}
+#message.show {
+  display: block;
 }
 
 /* Category */
@@ -65,18 +85,20 @@ h1 {
   padding: 10px;
   border-radius: 5px;
   text-align: center;
+  margin-left: auto;
+  margin-right: auto;
   max-width: var(--max-ui-width);
-  margin: auto;
-  background-color: var(--main-ui-color);
+  background-color: var(--main-ui-background-color);
+  color: var(--main-text-color);
 }
 
 #question {
   padding: 10px;
   border-radius: 5px;
   text-align: center;
-  margin: 5px;
-  background-color: var(--main-button-color);
+  background-color: var(--game-background-color);
   color: var(--game-text-color);
+  margin: 5px;
 }
 
 /* Answer */
@@ -84,40 +106,37 @@ h1 {
   padding: 10px;
   border-radius: 5px;
   text-align: center;
+  background-color: var(--main-ui-background-color);
+  color: var(--main-text-color);
   /* Boy do I love how easy it is to do grid layouts! 
      It's *so* much easier than the bootstrap way of doing it. */
   display: grid;
   grid-template-columns: auto auto;
 }
-
 #answers > .option {
   padding: 10px;
   border-radius: 5px;
   text-align: center;
-  background-color: var(--main-button-color);
+  background-color: var(--game-background-color);
   color: var(--game-text-color);
   margin: 3px;
 }
-
 #answers > .option:hover:not(.correct, .incorrect, .selected) {
-  background-color: var(--main-ui-color);
-  color: var(--main-button-color);
+  background-color: var(--main-ui-background-color);
+  color: var(--main-text-color);
 }
-
 #answers > .option.correct {
   background-color: green;
 }
-
 #answers > .option.incorrect {
   background-color: red;
 }
-
 #answers > .option.selected {
   border: solid blue 4px;
 }
 
 #next-question {
-  background-color: var(--main-button-color);
+  background-color: var(--game-background-color);
   color: var(--game-text-color);
 }
 
@@ -126,13 +145,13 @@ h1 {
   margin-top: 10px;
   margin-bottom: 10px;
   width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
   padding: 10px;
   border-radius: 5px;
   text-align: center;
-  background-color: var(--main-ui-color);
-  color: var(--settings-text);
+  margin-left: auto;
+  margin-right: auto;
+  background-color: var(--main-ui-background-color);
+  color: var(--main-text-color);
 }
 
 /* Settings */
@@ -140,15 +159,16 @@ h1 {
   padding: 10px;
   border-radius: 5px;
   text-align: center;
-  background-color: var(--main-ui-color);
-  color: var(--settings-text);
-  max-width: var(--max-ui-width);
-  margin-right: auto;
   margin-left: auto;
+  margin-right: auto;
+  background-color: var(--main-ui-background-color);
+  color: var(--main-text-color);
+  max-width: var(--max-ui-width);
 }
 
 #settings select, #settings option, #apply-settings {
-  background-color: var(--main-ui-color);
+  background-color: var(--main-ui-background-color);
+  color: var(--main-text-color);
 }
 
 /*# sourceMappingURL=style.css.map */
